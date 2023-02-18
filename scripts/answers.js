@@ -82,6 +82,8 @@
                         arr.push(i);
                     }
                 }
+                console.log(that.right);
+                console.log(results);
 
                 for (let a = 0; a < that.right.length; a++) {
 
@@ -90,18 +92,20 @@
 
                         optionElementsId.forEach(optionEl => {
 
-                            if (Number(optionEl.id) === Number(that.right[a])) {
+                            if (Number(results[a]) === Number(optionEl.id)) {
                                 if (Number(results[a]) === Number(that.right[a])) {
                                     optionEl.parentElement.className = 'correct';
                                 }
-                                if (Number(results[a]) !== Number(that.right[a]) && Number(that.right[a]) !== Number(res)) {
+                                if (Number(results[a]) !== Number(that.right[a])
+                                    // && Number(that.right[a]) !== Number(res)
+                                ) {
                                     optionEl.parentElement.className = 'wrong';
                                 }
                             }
                             if (Number(optionEl.id) === Number(res)) {
+                                optionEl.parentElement.className = 'answer-question-option';
                                 optionEl.parentElement.classList.remove('wrong');
                                 optionEl.parentElement.classList.remove('correct');
-                                optionEl.parentElement.className = 'answer-question-option';
 
                             }
 
