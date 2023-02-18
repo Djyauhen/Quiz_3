@@ -55,10 +55,6 @@
     display: flex;
 }
 
-.answer-question-option label {
-    cursor: pointer;
-}
-
 .correct label {
     color: #5FDC33;
     font-size: 20px;

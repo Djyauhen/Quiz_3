@@ -34,7 +34,6 @@
                 const url = new URL(location.href);
                 const results = url.searchParams.get('results').split(',');
 
-
                 this.quiz.questions.forEach(question => {
                     const optionElement = document.createElement('div');
                     optionElement.className = 'answers-question-options';
@@ -75,21 +74,40 @@
 
                 const that = this;
                 let optionElementsId = Array.from(document.getElementsByClassName('option-answer'));
-                console.log(optionElementsId);
-                optionElementsId.forEach(optionEl => {
-                    that.right.forEach(right => {
-                        const res = results.indexOf(String(right));
-                        if (res !== -1 && String(optionEl.id) === String(right)) {
-                            console.log(optionEl.id);
-                            optionEl.parentElement.className = 'correct';
-                        }
-                        if (res === -1 && String(optionEl.id) === String(right)) {
-                            console.log(optionEl.id);
-                            optionEl.parentElement.className = 'wrong';
-                        }
-                    })
 
-                });
+                const arr = [];
+
+                for (let i = 0; i < results.length; i++) {
+                    if (results[i] === '') {
+                        arr.push(i);
+                    }
+                }
+
+                for (let a = 0; a < that.right.length; a++) {
+
+                    arr.forEach(i => {
+                        const res = that.right[i];
+
+                        optionElementsId.forEach(optionEl => {
+
+                            if (Number(optionEl.id) === Number(that.right[a])) {
+                                if (Number(results[a]) === Number(that.right[a])) {
+                                    optionEl.parentElement.className = 'correct';
+                                }
+                                if (Number(results[a]) !== Number(that.right[a]) && Number(that.right[a]) !== Number(res)) {
+                                    optionEl.parentElement.className = 'wrong';
+                                }
+                            }
+                            if (Number(optionEl.id) === Number(res)) {
+                                optionEl.parentElement.classList.remove('wrong');
+                                optionEl.parentElement.classList.remove('correct');
+                                optionEl.parentElement.className = 'answer-question-option';
+
+                            }
+
+                        });
+                    })
+                }
             },
         }
         Answers.init();
